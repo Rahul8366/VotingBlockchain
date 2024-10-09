@@ -4,6 +4,7 @@ import Login from './Login';      // Your Login component
 import Vote from './Vote';        // Your Vote component
 import Register from './Register';
 import Candidate from './Candidates';
+import SendTransaction from './SendTransaction';
 
 const App = () => {
     return (
@@ -15,6 +16,7 @@ const App = () => {
                     <Route path="/login" element={<Login />} />
                     <Route path="/vote" element={<Vote />} />
                     <Route path="/candidates" element={<Candidate />} />
+                    {/* <Route path="/send" element={<SendTransaction />} /> */}
                 </Routes>
             </div> 
         </Router>

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import 'bootstrap/dist/css/bootstrap.min.css'; // Make sure Bootstrap CSS is imported
 
 const Candidate = () => {
     const [name, setName] = useState('');
@@ -18,7 +19,7 @@ const Candidate = () => {
                 setError('Failed to load candidates.');
             }
         };
-        
+
         fetchCandidates();
     }, []);
 
@@ -49,31 +50,46 @@ const Candidate = () => {
     };
 
     return (
-        <div>
-            <h3>Add a Candidate</h3>
-            {error && <div className="alert alert-danger">{error}</div>}
-            {success && <div className="alert alert-success">{success}</div>}
-            <form onSubmit={handleAddCandidate}>
-                <input
-                    type="text"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    placeholder="Candidate Name"
-                    required
-                />
-                <button type="submit">Add Candidate</button>
-            </form>
+        <div className="container mt-5">
+            <div className="card mb-4">
+                <div className="card-header">
+                    <h3>Add a Candidate</h3>
+                </div>
+                <div className="card-body">
+                    {error && <div className="alert alert-danger">{error}</div>}
+                    {success && <div className="alert alert-success">{success}</div>}
+                    <form onSubmit={handleAddCandidate}>
+                        <div className="mb-3">
+                            <input
+                                type="text"
+                                className="form-control"
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                                placeholder="Candidate Name"
+                                required
+                            />
+                        </div>
+                        <button type="submit" className="btn btn-primary">Add Candidate</button>
+                    </form>
+                </div>
+            </div>
 
-            <h4>Existing Candidates</h4>
-            <ul>
-                {candidates.length > 0 ? (
-                    candidates.map((candidate) => (
-                        <li key={candidate._id}>{candidate.name}</li>
-                    ))
-                ) : (
-                    <li>No candidates available</li>
-                )}
-            </ul>
+            <div className="card">
+                <div className="card-header">
+                    <h4>Existing Candidates</h4>
+                </div>
+                <div className="card-body">
+                    <ul className="list-group">
+                        {candidates.length > 0 ? (
+                            candidates.map((candidate) => (
+                                <li className="list-group-item" key={candidate._id}>{candidate.name}</li>
+                            ))
+                        ) : (
+                            <li className="list-group-item">No candidates available</li>
+                        )}
+                    </ul>
+                </div>
+            </div>
         </div>
     );
 };
